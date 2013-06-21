@@ -1,0 +1,203 @@
+// Fractions
+$fractions: 1, 3/4, 2/3, 1/2, 1/3, 1/4, 1/6, 1/8, 1/10;
+$ie7-fractions: false, 74.99%, false, 49.99%, false, false, false, false, false;
+$ie6-fractions: false, false, false, 49.9%, false, false, false, false, 9.95%;
+$fraction-names: full, three-quarters, two-thirds, half, third, quarter, sixth, eigth, tenth;
+
+// Border box model
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// Clearfix
+@mixin clearfix {
+  *zoom: 1;
+  &:before, &:after { content: ""; display: table; }
+  &:after { clear: both; }
+}
+
+// Legacy clearfix
+@mixin legacy-clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+  &:after { clear: both; }
+}
+
+// Grid container
+@mixin grid-container($spacing: 1em, $legacy: false) {
+  // Consistent spacing around rows and columns.
+  padding: $spacing/2;
+}
+
+// Grid row
+@mixin grid-row($spacing: 1em, $legacy: false) {
+  
+  // Clearfix.
+  @if ($legacy) { @include legacy-clearfix; }
+  @else { @include clearfix; }
+
+  // Elastic row spacing.
+  @include border-box;
+  padding: $spacing/2 0;
+
+  // Prevent double spacing in nested rows.
+  & &:first-child { padding-top: 0; }
+  & &:last-child  { padding-bottom: 0; }
+}
+
+// Grid cell
+@mixin grid-cell($spacing: 1em, $legacy: false) {
+
+  // Positioning.
+  float: left;
+  position: relative;
+  
+  // Elastic gutters.
+  @include border-box;
+  padding: 0 $spacing/2;
+
+  // Prevent double gutters in nested cells.
+  & &:first-child { padding-left: 0; }
+  & &:last-child  { padding-right: 0; }
+  
+  // Fix cell spacing in IE6/7 without quirksmode:
+  // Apply padding to a nested .content element instead.
+  @if ($legacy) {
+    *padding: 0;
+    .content { *padding: 0 $spacing/2; }
+  }
+}
+
+// Elements
+@mixin grid-elements($prefix: false, $spacing: 1em, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  .#{$prefix}container { @include grid-container($spacing: $spacing, $legacy: $legacy); }
+  .#{$prefix}row { @include grid-row($spacing: $spacing, $legacy: $legacy); }
+  .#{$prefix}cell { @include grid-cell($spacing: $spacing, $legacy: $legacy); }
+}
+
+// Visibility
+@mixin grid-visibility($prefix: false, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  .#{$prefix}foreground { z-index: 1; } // Show above overlapping cells.
+  .#{$prefix}background { z-index: -1; } // Show below overlapping cells.
+  .#{$prefix}hidden { display: none !important; visibility: hidden; } // Hide from both screenreaders and browsers.
+  .#{$prefix}invisible { visibility: hidden; } // Hide visually and from screenreaders but maintain layout.
+  .#{$prefix}visible { display: block; visibility: visible; } // Display for browsers and screenreaders.
+}
+
+// Widths
+@mixin grid-widths($prefix: false, $base: 100%, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  @for $i from 1 to length($fractions)+1 {
+    .#{$prefix}#{nth($fraction-names, $i)} {
+      width: $base * nth($fractions, $i);
+      @if ($legacy) {
+        @if (nth($ie7-fractions, $i)) { *width: nth($ie7-fractions, $i); }
+        @if (nth($ie6-fractions, $i)) { * html & { width: nth($ie6-fractions, $i); } }
+      }
+    }
+  }
+}
+
+// Prepending
+@mixin grid-prepend($prefix: false, $base: 100%, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  @for $i from 1 to length($fractions)+1 {
+    .#{$prefix}prepend-#{nth($fraction-names, $i)} {
+      margin-left: $base * nth($fractions, $i);
+      @if ($legacy) {
+        @if (nth($ie7-fractions, $i)) { *margin-left: nth($ie7-fractions, $i); }
+        @if (nth($ie6-fractions, $i)) { * html & { margin-left: nth($ie6-fractions, $i); } }
+      }
+    }
+  }
+}
+
+// Appending
+@mixin grid-append($prefix: false, $base: 100%, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  @for $i from 1 to length($fractions)+1 {
+    .#{$prefix}append-#{nth($fraction-names, $i)} {
+      margin-right: $base * nth($fractions, $i);
+      @if ($legacy) {
+        @if (nth($ie7-fractions, $i)) { *margin-right: nth($ie7-fractions, $i); }
+        @if (nth($ie6-fractions, $i)) { * html & { margin-right: nth($ie6-fractions, $i); } }
+      }
+    }
+  }
+}
+
+// Pushing
+@mixin grid-push($prefix: false, $base: 100%, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  @for $i from 1 to length($fractions)+1 {
+    .#{$prefix}push-#{nth($fraction-names, $i)} {
+      left: $base * nth($fractions, $i);
+      @if ($legacy) {
+        @if (nth($ie7-fractions, $i)) { *left: nth($ie7-fractions, $i); }
+        @if (nth($ie6-fractions, $i)) { * html & { left: nth($ie6-fractions, $i); } }
+      }
+    }
+  }
+}
+
+// Pulling
+@mixin grid-pull($prefix: false, $base: 100%, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  @for $i from 1 to length($fractions)+1 {
+    .#{$prefix}pull-#{nth($fraction-names, $i)} {
+      right: $base * nth($fractions, $i);
+      @if ($legacy) {
+        @if (nth($ie7-fractions, $i)) { *right: nth($ie7-fractions, $i); }
+        @if (nth($ie6-fractions, $i)) { * html & { right: nth($ie6-fractions, $i); } }
+      }
+    }
+  }
+}
+
+// Dynamic rows
+@mixin grid-dynamic-rows($prefix: false, $legacy: false) {
+  $prefix: if($prefix, $prefix+"-", "");
+  .#{$prefix}row { @include grid-row($legacy: $legacy); }
+  .#{$prefix}no-row { padding: 0; }
+  .#{$prefix}no-row:before,
+  .#{$prefix}no-row:after { display: none; }
+}
+
+// Generate basic grid
+@mixin grid($base: 100%, $spacing: 1em, $extended: false, $legacy: false) {
+  @include grid-elements($spacing: $spacing);
+  @include grid-widths($base: $base);
+  @include grid-visibility;
+  
+  @if ($extended) {
+    @include grid-prepend($base: $base);
+    @include grid-append($base: $base);
+    @include grid-push($base: $base);
+    @include grid-pull($base: $base);
+  }
+}
+
+// Generate additional layouts
+@mixin grid-flavor($prefix, $extended: false, $legacy: false) {
+  @include grid-widths($prefix: $prefix, $legacy: $legacy);
+  @include grid-visibility($prefix: $prefix, $legacy: $legacy);
+  @include grid-dynamic-rows($prefix: $prefix, $legacy: $legacy);
+  
+  @if ($extended) {
+    @include grid-prepend($prefix: $prefix, $base: $base, $legacy: $legacy);
+    @include grid-append($prefix: $prefix, $base: $base, $legacy: $legacy);
+    @include grid-push($prefix: $prefix, $base: $base, $legacy: $legacy);
+    @include grid-pull($prefix: $prefix, $base: $base, $legacy: $legacy);
+  }
+}
