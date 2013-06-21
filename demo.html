@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>grid</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+  </head>
+  <body class="container">
+    
+    <h1>grid</h1>
+    
+    <h2>subdivisions</h2>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell full"><div class="content">1/1</div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell three-quarters"><div class="content">3/4</div></div>
+      <div class="cell quarter"><div class="content"></div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell two-thirds"><div class="content">2/3</div></div>
+      <div class="cell third"><div class="content"></div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell half"><div class="content">1/2</div></div>
+      <div class="cell half"><div class="content"></div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell third"><div class="content">1/3</div></div>
+      <div class="cell third"><div class="content"></div></div>
+      <div class="cell third"><div class="content"></div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell quarter"><div class="content">1/4</div></div>
+      <div class="cell quarter"><div class="content"></div></div>
+      <div class="cell quarter"><div class="content"></div></div>
+      <div class="cell quarter"><div class="content"></div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+      
+      <div class="cell sixth"><div class="content">1/6</div></div>
+      <div class="cell sixth"><div class="content"></div></div>
+      <div class="cell sixth"><div class="content"></div></div>
+      <div class="cell sixth"><div class="content"></div></div>
+      <div class="cell sixth"><div class="content"></div></div>
+      <div class="cell sixth"><div class="content"></div></div>
+      
+    </div>
+    
+    <div class="row demo-subdivison">
+        
+      <div class="cell eigth"><div class="content">1/8</div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+      <div class="cell eigth"><div class="content"></div></div>
+        
+    </div>
+    
+    <div class="row demo-subdivison">
+        
+      <div class="cell tenth"><div class="content">1/10</div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+      <div class="cell tenth"><div class="content"></div></div>
+        
+    </div>
+    
+    <h2>irregular layouts</h2>
+    
+    <div class="row">
+      
+      <div class="cell third"><div class="content">1/3</div></div>
+      <div class="cell quarter"><div class="content">1/4</div></div>
+      <div class="cell quarter"><div class="content">1/4</div></div>
+      <div class="cell sixth"><div class="content">1/6</div></div>
+      
+    </div>
+    
+    <div class="row">
+      
+      <div class="cell eigth"><div class="content">1/8</div></div>
+      <div class="cell eigth"><div class="content">1/8</div></div>
+      <div class="cell half"><div class="content">1/2</div></div>
+      <div class="cell quarter"><div class="content">1/4</div></div>
+      
+    </div>
+    
+    <h2>nested layouts</h2>
+    
+    <div class="row">
+      
+      <div class="cell sixth"><div class="content double-height">A</div></div>
+      
+      <div class="cell two-thirds">
+        
+        <div class="row">
+          <div class="cell half"><div class="content">B</div></div>
+          <div class="cell half"><div class="content">C</div></div>
+        </div>
+        
+        <div class="row">
+          <div class="cell third"><div class="content">D</div></div>
+          <div class="cell third"><div class="content">E</div></div>
+          <div class="cell third"><div class="content">F</div></div>
+        </div>
+        
+      </div>
+      
+      <div class="cell sixth">
+        <div class="row"><div class="content half-height">G</div></div>
+        <div class="row"><div class="content half-height">H</div></div>
+        <div class="row"><div class="content half-height">I</div></div>
+        <div class="row"><div class="content half-height">J</div></div>
+      </div>
+      
+    </div>
+    
+    <h2>positioning</h2>
+    
+    <div class="row">
+      <div class="cell quarter append-sixth"><div class="content">A</div></div>
+      <div class="cell third append-eigth"><div class="content">B</div></div>
+      <div class="cell eigth"><div class="content">C</div></div>
+    </div>
+    
+    <div class="row">
+      <div class="cell sixth prepend-quarter"><div class="content">D</div></div>
+      <div class="cell eigth prepend-third"><div class="content">E</div></div>
+    </div>
+    
+    <div class="row">
+      <div class="cell eigth prepend-half push-quarter"><div class="content">F</div></div>
+    </div>
+    
+    <h2>adaptive cells</h2>
+    
+    <div class="row demo-dynamic-width">
+      
+      <div class="cell half medium-third wide-quarter"><div class="content">A</div></div>
+      <div class="cell half medium-two-thirds wide-three-quarters"><div class="content">B</div></div>
+      
+    </div>
+    
+    <div class="row demo-dynamic-width">
+      <div class="cell third medium-half wide-two-thirds"><div class="content">C</div></div>
+      <div class="cell third medium-quarter wide-sixth"><div class="content">D</div></div>
+      <div class="cell third medium-quarter wide-sixth"><div class="content">E</div></div>
+    </div>
+    
+    <h2>adaptive rows</h2>
+    
+    <div class="row medium-no-row">
+      
+      <div class="medium-row wide-no-row">
+        
+        <div class="wide-row">
+          <div class="cell quarter medium-half wide-full"><div class="content">A</div></div>
+        </div>
+        
+        <div class="wide-row">
+          <div class="cell quarter medium-half wide-full"><div class="content">B</div></div>
+        </div>
+        
+      </div>
+      
+      <div class="medium-row wide-no-row">
+        
+        <div class="wide-row">
+          <div class="cell quarter medium-half wide-full"><div class="content">C</div></div>
+        </div>
+        
+        <div class="wide-row">
+          <div class="cell quarter medium-half wide-full"><div class="content">D</div></div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="row">
+      
+      <div class="row wide-no-row">
+        
+        <div class="row medium-no-row">
+          <div class="cell full medium-half wide-quarter"><div class="content">E</div></div>
+        </div>
+        
+        <div class="row medium-no-row">
+          <div class="cell full medium-half wide-quarter"><div class="content">F</div></div>
+        </div>
+        
+      </div>
+      
+      <div class="row wide-no-row">
+        
+        <div class="row medium-no-row">
+          <div class="cell full medium-half wide-quarter"><div class="content">G</div></div>
+        </div>
+        
+        <div class="row medium-no-row">
+          <div class="cell full medium-half wide-quarter"><div class="content">H</div></div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </body>
+</html>
