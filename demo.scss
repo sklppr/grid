@@ -1,0 +1,107 @@
+@charset "utf-8";
+@import "grid";
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-align: center;
+  font-family: sans-serif;
+  color: #444;
+  background: #eee;
+}
+
+body {
+  font-size: 1em;
+  line-height: 1.4;
+  text-align: left;
+  width: 960px;
+  width: auto !important;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.3125em;
+  font-weight: bold;
+}
+
+$spacing: 1em;
+
+$content-height: 4em;
+$half-height: ($content-height - $spacing) / 2;
+$double-height: 2*$content-height + $spacing;
+
+.content { height: $content-height; line-height: $content-height; }
+.half-height { height: $half-height; line-height: $half-height; }
+.double-height { height: $double-height; line-height: $double-height; }
+
+.content {
+  @include border-box;
+  text-align: center;
+  color: #ddd;
+  border: 1px solid #444;
+  -webkit-border-radius: .25em;
+  -moz-border-radius: .25em;
+  border-radius: .25em;
+  
+  -webkit-transition: height .5s ease, background-color .5s ease;
+  -moz-transition: height .5s ease, background-color .5s ease;
+  -ms-transition: height .5s ease, background-color .5s ease;
+  -o-transition: height .5s ease, background-color .5s ease;
+  transition: height .5s ease, background-color .5s ease;
+}
+
+.demo-subdivison .cell:not(:first-child) .content { border-color: #aaa; background-color: #ddd; }
+
+.demo-dynamic-width .cell {
+  -webkit-transition: width .5s ease;
+  -moz-transition: width .5s ease;
+  -ms-transition: width .5s ease;
+  -o-transition: width .5s ease;
+  transition: width .5s ease;
+}
+
+$widths-reversed: tenth, eigth, sixth, quarter, third, half, three-quarters, two-thirds, full;
+$hue: 0;
+
+@mixin demo($name: false) {
+  $prefix: if($name, $name+"-", "");
+  
+  h1:after { content: " layout: " + $name; }
+  
+  @each $width in $widths-reversed {
+    .#{$prefix}#{$width} .content { background-color: hsl($hue, 30%, 40%); }
+    $hue: $hue + 360/length($widths-reversed);
+  }
+}
+
+@include grid($extended: true);
+@include demo;
+
+@media screen {
+  
+  // compact
+  @media (max-width: 480px) {
+    @include grid-flavor("compact");
+    @include demo("compact");
+  }
+  
+  // medium
+  @media (min-width: 481px) {
+    @include grid-flavor("medium");
+    @include demo("medium");
+  }
+  
+  // wide
+  @media (min-width: 961px) {
+    @include grid-flavor("wide");
+    @include demo("wide");
+  }
+  
+}
